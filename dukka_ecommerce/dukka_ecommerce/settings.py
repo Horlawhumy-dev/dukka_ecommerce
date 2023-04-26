@@ -1,9 +1,8 @@
 import logging.config
 import os
-from dotenv import load_dotenv
-
 from pathlib import Path
 
+from dotenv import load_dotenv
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework"
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -69,13 +68,13 @@ WSGI_APPLICATION = "dukka_ecommerce.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': str(os.getenv('DATABASE_NAME')),
-        'USER': str(os.getenv('DATABASE_USER')),
-        'PASSWORD': str(os.getenv('DATABASE_PASSWORD')),
-        'HOST': str(os.getenv('DATABASE_HOST')),
-        'PORT': str(os.getenv('DATABASE_PORT'))
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": str(os.getenv("DATABASE_NAME")),
+        "USER": str(os.getenv("DATABASE_USER")),
+        "PASSWORD": str(os.getenv("DATABASE_PASSWORD")),
+        "HOST": str(os.getenv("DATABASE_HOST")),
+        "PORT": str(os.getenv("DATABASE_PORT")),
     }
 }
 
@@ -123,9 +122,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.IsAdminUser',
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.IsAdminUser",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -186,7 +185,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
 CACHES = {
     "default": {
-            "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-            "LOCATION": "127.0.0.1:11211",
-        }
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
 }
