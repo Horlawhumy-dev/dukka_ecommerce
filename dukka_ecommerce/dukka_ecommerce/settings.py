@@ -1,3 +1,4 @@
+from datetime import timedelta
 import logging.config
 import os
 from pathlib import Path
@@ -33,7 +34,8 @@ INSTALLED_APPS = [
     "rest_framework",
 
 
-    "account"
+    "account",
+    "payment"
 ]
 
 MIDDLEWARE = [
@@ -106,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
@@ -123,6 +125,10 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+FLUTTERWAVE_PUBLIC_KEY = os.getenv("FLW_PUBLIC_KEY")
+FLUTTERWAVE_SECRET_KEY = os.getenv("FLW_SECRET_KEY")
+FLUTTERWAVE_ENCRYPTION_KEY = os.getenv("FLW__ENCRYPTION_KEY")
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
@@ -145,6 +151,16 @@ REST_FRAMEWORK = {
     #     'user': '10/day',
     #     'register-account': '2/day'
     # }
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=60),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
 
 
