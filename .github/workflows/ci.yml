@@ -1,6 +1,8 @@
-name: CI Pipeline
+name: Install Dependecies, Run Test, and Format codes
 
 on:
+  workflow_call:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -8,20 +10,51 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    env:
+      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+      DB_IGNORE_SSL: "true"
 
-    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: 12Facebook@6
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     strategy:
-      max-parallel: 4
+      max-parallel: 16
       matrix:
-        python-version: [3.8, 3.9]
+        os: [ubuntu-latest]
+        python-version: ['3.8', '3.10']
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r ./dukka_ecommerce/requirements.txt
+
+    # - name: Run tests script
+    #   run: python3 ./dukka_ecommerce/manage.py test
+
+    - name: Auto format, sort, remove unused imports from .py codes
+      run: |
+        chmod 744 ./dukka_ecommerce/format-py-codes.sh
+        ./dukka_ecommerce/format-py-codes.sh
+        # flake8 ./dukka_ecommerce --max-line-length=100
