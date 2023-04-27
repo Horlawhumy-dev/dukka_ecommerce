@@ -25,13 +25,11 @@ DOMAIN = "localhost:8080"
 
 if not DEBUG:
     PROTOCOL = "https"
-    DOMAIN = "https://dukkaecomm.fly.dev/"
-    ALLOWED_HOSTS = ["https://dukkaecomm.fly.dev/"]
+    ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ["https://dukkaecomm.fly.dev/"]
+CSRF_TRUSTED_ORIGINS = ["*"]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "66.241.125.2",
-"https://dukkaecomm.fly.dev/"]
+ALLOWED_HOSTS = ["*"] #ofcourse this is not secure and it will be changed if in going to deploy in real prod
 
 
 # Application definition
@@ -132,6 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
