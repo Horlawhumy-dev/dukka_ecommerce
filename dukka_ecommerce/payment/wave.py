@@ -6,7 +6,7 @@ import json
 import requests
 from Crypto.Cipher import DES3
 from hashlib import sha256
-
+import os
 
 class Flutterwave(object):
 	"""Flutterwave Class"""
@@ -14,7 +14,7 @@ class Flutterwave(object):
 	public_key = settings.FLUTTERWAVE_PUBLIC_KEY
 	secret_key = settings.FLUTTERWAVE_SECRET_KEY
 	encryption_key = settings.FLUTTERWAVE_ENCRYPTION_KEY
-	base_url = 'https://api.flutterwave.com/v3'
+	base_url = str(os.getenv("WAVE_BASE_URL"))
 
 
 	def __encrypt_data(self, payload):
