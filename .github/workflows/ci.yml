@@ -50,8 +50,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r ./dukka_ecommerce/requirements.txt
 
-    # - name: Run tests script
-    #   run: python3 ./dukka_ecommerce/manage.py test
+    - name: Run tests script
+      run: python3 ./dukka_ecommerce/manage.py test
 
     - name: Auto format, sort, remove unused imports from .py codes
       run: |
