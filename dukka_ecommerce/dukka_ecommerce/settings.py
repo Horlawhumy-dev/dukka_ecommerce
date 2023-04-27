@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_celery_beat",
 
 
     "account",
@@ -141,16 +142,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [],
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    # 'DEFAULT_THROTTLE_CLASSES': [
-    #     'rest_framework.throttling.AnonRateThrottle',
-    #     'rest_framework.throttling.UserRateThrottle',
-    #     'rest_framework.throttling.ScopedRateThrottle'
-    # ],
-    # 'DEFAULT_THROTTLE_RATES': {
-    #     'anon': '5/day',
-    #     'user': '10/day',
-    #     'register-account': '2/day'
-    # }
 }
 
 SIMPLE_JWT = {
@@ -202,16 +193,16 @@ logging.config.dictConfig(
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+#         "LOCATION": "127.0.0.1:11211",
+#     }
+# }
 
 # Celery Broker - Redis  
-CELERY_BROKER_URL = 'redis://localhost:6379'  
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'  
+CELERY_BROKER_URL = str(os.getenv('CELERY_BROKER_URL'))  
+CELERY_RESULT_BACKEND = str(os.getenv('CELERY_RESULT_BACKEND'))  
 CELERY_ACCEPT_CONTENT = ['application/json']  
 CELERY_TASK_SERIALIZER = 'json'  
 CELERY_RESULT_SERIALIZER = 'json'  

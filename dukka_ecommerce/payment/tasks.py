@@ -7,12 +7,13 @@ from .wave import Flutterwave
 
 from celery import shared_task
 
-@shared_task(name = "charge_customer")
-def charge_customer(message, *args, **kwargs):
-    charge_response = charge_card()
-    validate_response = validate_charge(charge_response)
+flutterwave = Flutterwave()
 
-    verify_payment(validate_response)
+
+@shared_task(name = "charge_customer")
+def charge_customer():
+    verify_res = verify_payment()
+    print(verify_res) #printing the response for testing only
   
 
 def get_transaction_reference(length=16):
@@ -26,13 +27,14 @@ def get_transaction_reference(length=16):
 
 def charge_card():
     """Charge Card"""
+    #ofcourse this credential would be cached in a more secure way 
     data = {
         "card_number": str(os.getenv("CARD_NUMBER")),
         "cvv": str(os.getenv("CVV")),
         "expiry_month": str(os.getenv("EXPIRY_MONTH")),
         "expiry_year": str(os.getenv("EXPIRY_YEAR")),
         "currency": str(os.getenv("CURRENCY")),
-        "amount": str(os.getenv("AMOUN")),
+        "amount": str(os.getenv("AMOUNT")),
         "fullname": str(os.getenv("FULLNAME")),
         "email": str(os.getenv("EMAIL")),
         "tx_ref": get_transaction_reference(),
@@ -41,21 +43,20 @@ def charge_card():
             "pin": str(os.getenv("PIN"))
         }
     }
-    flutterwave = Flutterwave()
-    response = flutterwave.charge_card(data)
-    return response
+    res = flutterwave.charge_card(data)
+    return res.json()
 
-def validate_charge(response:  dict()):
+def validate_charge():
     """Validate charge"""
+    response = charge_card()
     flw_ref = response["data"]["flw_ref"]
-    otp = str(os.getenv["OTP"])
-    flutterwave = Flutterwave()
-    response = flutterwave.validate_charge(flw_ref, otp)
-    return response
+    otp = "6656" #str(os.getenv["OTP"])
+    res = flutterwave.validate_charge(flw_ref, otp)
+    return res.json()
 
-def verify_payment(response: dict()):
+def verify_payment():
     """Verify Payment"""
-    _id = response["data"]['transaction_id']
-    flutterwave = Flutterwave()
-    response = flutterwave.verify_transaction(_id)
-    return response
+    response = validate_charge()
+    _id = response["data"]["id"]
+    res = flutterwave.verify_transaction(_id)
+    return res.json()

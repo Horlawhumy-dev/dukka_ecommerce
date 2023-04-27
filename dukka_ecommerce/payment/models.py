@@ -7,7 +7,7 @@ User = get_user_model()
 
 
 class Transaction(models.Model):
-	"""Order Transaction model"""
+	"""Order Transaction History model"""
 
 	flutterwave_reference = models.CharField(max_length=64, blank=True, null=True)
 	internal_reference = models.CharField(max_length=64, blank=True, null=True)

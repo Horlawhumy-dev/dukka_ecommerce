@@ -26,29 +26,32 @@ def debug_task(self):
 
 app.conf.beat_schedule = {
     #Scheduler Name
-    'test_charge_customer_every_10seconds': {
-        # Task Name (Name Specified in Decorator)
-        'task': 'charge_customer',  
-        # Schedule      
-        'schedule': 10
-    },
     'charge_customer_every_week': {
         # Task Name (Name Specified in Decorator)
         'task': 'charge_customer',  
         # Schedule      
-        'schedule': crontab(0, 0, day_of_week='1')
+        'schedule': crontab(0, 0, day_of_week='1'), #runs every first day of the week
+        'options': {
+            'expires': 15.0, #cancel task if not able to run after these seconds
+        },
     },
     'charge_customer_every_month': {
         # Task Name (Name Specified in Decorator)
         'task': 'charge_customer',  
         # Schedule      
-        'schedule': crontab(0, 0, day_of_month='1')
+        'schedule': crontab(0, 0, day_of_month='1'),  #runs every first day of the month
+        'options': {
+            'expires': 15.0, #cancel task if not able to run after these seconds
+        },
     },
        'charge_customer_every_year': {
         # Task Name (Name Specified in Decorator)
         'task': 'charge_customer',  
         # Schedule      
-        'schedule': crontab(0, 0, month_of_year='1')
+        'schedule': crontab(0, 0, month_of_year='1'), #runs every first month of the year
+        'options': {
+            'expires': 15.0, #cancel task if not able to run after these seconds
+        },
     },
 
 }
