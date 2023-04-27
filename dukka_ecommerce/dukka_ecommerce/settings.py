@@ -19,7 +19,19 @@ SECRET_KEY = str(os.getenv("SECRET_KEY"))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv("DEBUG"))
 
-ALLOWED_HOSTS = []
+
+PROTOCOL = "http"
+DOMAIN = "localhost:8080"
+
+if not DEBUG:
+    PROTOCOL = "https"
+    DOMAIN = "https://dukkaecomm.fly.dev/"
+    ALLOWED_HOSTS = ["https://dukkaecomm.fly.dev/"]
+
+CSRF_TRUSTED_ORIGINS = ["https://dukkaecomm.fly.dev/"]
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "66.241.125.2",
+"https://dukkaecomm.fly.dev/"]
 
 
 # Application definition
