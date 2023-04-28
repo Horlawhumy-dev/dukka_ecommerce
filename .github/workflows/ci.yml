@@ -48,13 +48,13 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r ./dukka_ecommerce/requirements.txt
+        pip install -r requirements.txt
 
     - name: Run tests script
-      run: python3 ./dukka_ecommerce/manage.py test
+      run: python3 manage.py test
 
     - name: Auto format, sort, remove unused imports from .py codes
       run: |
-        chmod 744 ./dukka_ecommerce/format-py-codes.sh
-        ./dukka_ecommerce/format-py-codes.sh
-        # flake8 ./dukka_ecommerce --max-line-length=100
+        chmod 744 format-py-codes.sh
+        format-py-codes.sh
+        # flake8  --max-line-length=100

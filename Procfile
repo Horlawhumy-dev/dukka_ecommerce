@@ -1,1 +1,1 @@
-web: gunicorn 'dukka_ecommerce.wsgi'
+web: python manage.py migrate && gunicorn dukka_ecommerce.wsgi
