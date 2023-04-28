@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ChargeCardSerializer, OrderTransactionSerializer, \
+from .serializers import ChargeCardSerializer, OrderHistorySerializer, \
 	ValidateCardChargeSerializer, VerifyPaymentSerializer
 
 from payment.models import Transaction
@@ -26,8 +26,8 @@ class ChargeCardAPIView(APIView):
 		"""Post method"""
 
 		#no need of fullname in the request from user again
-		request_user_fullname = f"{request.user.first_name} {request.user.last_name}"
-		request.data["fullname"] = request_user_fullname
+		# request_user_fullname = f"{request.user.first_name} {request.user.last_name}"
+		# request.data["fullname"] = request_user_fullname
 
 		serializer = self.serializer_class(data=request.data,  context={"request": request})
 		if serializer.is_valid():
@@ -73,24 +73,24 @@ class VerifyPaymentAPIView(APIView):
 			return Response(serializer.errors, status=400)
 
 
-class OrderTransaction(APIView):
-	"""  View for Order Transaction Endpoint """
+class OrderHistoryView(APIView):
+	"""  View for Order History Endpoint """
 	permission_classes = [IsAuthenticated]
 
 	def post(self, request):
-		serializer = OrderTransactionSerializer(data=request.data, context={"request": request})
+		serializer = OrderHistorySerializer(data=request.data, context={"request": request})
 
 		if serializer.is_valid():
 
 			serializer.save()
 
 			return APIResponse.send(
-				message=f"{request.user} order payment is successfully saved.",
+				message=f"{request.user} order payment history is successfully saved.",
 				status=status.HTTP_201_CREATED,
 				data=serializer.data
 			)
 		return APIResponse.send(
-				message=f"Order transaction not saved.",
+				message=f"Order history not saved.",
 			status=status.HTTP_400_BAD_REQUEST,
 			err=str(serializer.errors)
 		)
@@ -103,19 +103,19 @@ class OrderTransaction(APIView):
 		
 		except Transaction.DoesNotExist as err:
 			return APIResponse.send(
-				message="Order transactions not found for this user.",
+				message="Order history not found for this user.",
 				status=status.HTTP_404_NOT_FOUND,
 				err=str(err)
 			)
 
-		serializer = OrderTransactionSerializer
+		serializer = OrderHistorySerializer
 
 		if serializer.is_valid:
 
 			data = serializer(order_transactions, many=True).data
 
 			return APIResponse.send(
-				message="Order transactions fetched successfully.",
+				message="Order history fetched successfully.",
 				status=status.HTTP_200_OK,
 				data=data
 			)
@@ -125,3 +125,5 @@ class OrderTransaction(APIView):
 				status=status.HTTP_400_BAD_REQUEST,
 				err=str(serializer.errors)
 			)
+	 
+	## Notes: All other HTTP methods could be implementd if need be.

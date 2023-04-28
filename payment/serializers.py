@@ -118,7 +118,7 @@ class VerifyPaymentSerializer(serializers.Serializer):
 		pass
 
 
-class OrderTransactionSerializer(serializers.ModelSerializer):
+class OrderHistorySerializer(serializers.ModelSerializer):
 	user_involved = serializers.SerializerMethodField()
 
 	def get_user_involved(self, obj):
