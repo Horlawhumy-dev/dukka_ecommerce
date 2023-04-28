@@ -85,25 +85,31 @@ WSGI_APPLICATION = "dukka_ecommerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# local postgres for development and testing modes
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': str(os.getenv('DATABASE_NAME')),
-        'USER': str(os.getenv('DATABASE_USER')),
-        'PASSWORD': str(os.getenv('DATABASE_PASSWORD')),
-        'HOST': str(os.getenv('DATABASE_HOST')),
-        'PORT': str(os.getenv('DATABASE_PORT'))
-    }
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
-else:
-    DATABASE_URL = os.getenv("DATABASE_URL")
+# local postgres for development and testing modes
+# if DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': str(os.getenv('DATABASE_NAME')),
+#         'USER': str(os.getenv('DATABASE_USER')),
+#         'PASSWORD': str(os.getenv('DATABASE_PASSWORD')),
+#         'HOST': str(os.getenv('DATABASE_HOST')),
+#         'PORT': str(os.getenv('DATABASE_PORT'))
+#     }
+# }
 
-    DATABASES = {
-        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-    }
+# else:
+# DATABASE_URL = os.getenv("DATABASE_URL")
+
+#     DATABASES = {
+#         "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+#     }
 
 
 
