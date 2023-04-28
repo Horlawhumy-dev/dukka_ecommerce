@@ -27,7 +27,7 @@ if not DEBUG:
     PROTOCOL = "https"
     ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ["https://dukkaecomm.fly.dev/"]
+CSRF_TRUSTED_ORIGINS = ["https://dukka-power-test-production.up.railway.app"]
 
 ALLOWED_HOSTS = ["*"] #ofcourse this is not secure and it will be changed if in going to deploy in real prod
 
