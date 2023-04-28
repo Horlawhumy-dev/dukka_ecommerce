@@ -2,7 +2,7 @@ from datetime import timedelta
 import logging.config
 import os
 from pathlib import Path
-
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -83,16 +84,13 @@ WSGI_APPLICATION = "dukka_ecommerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": str(os.getenv("DATABASE_NAME")),
-        "USER": str(os.getenv("DATABASE_USER")),
-        "PASSWORD": str(os.getenv("DATABASE_PASSWORD")),
-        "HOST": str(os.getenv("DATABASE_HOST")),
-        "PORT": str(os.getenv("DATABASE_PORT")),
-    }
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
+
 
 
 # Password validation
