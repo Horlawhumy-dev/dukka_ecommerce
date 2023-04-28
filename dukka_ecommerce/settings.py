@@ -217,13 +217,6 @@ logging.config.dictConfig(
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-#         "LOCATION": "127.0.0.1:11211",
-#     }
-# }
-
 # Celery Broker - Redis  
 CELERY_BROKER_URL = str(os.getenv('CELERY_BROKER_URL'))  
 CELERY_RESULT_BACKEND = str(os.getenv('CELERY_RESULT_BACKEND'))  

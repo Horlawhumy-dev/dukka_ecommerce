@@ -57,4 +57,3 @@ jobs:
       run: |
         chmod 744 format-py-codes.sh
         format-py-codes.sh
-        # flake8  --max-line-length=100

@@ -26,6 +26,15 @@ def debug_task(self):
 
 app.conf.beat_schedule = {
     #Scheduler Name
+    'charge_customer_minute': {
+        # Task Name (Name Specified in Decorator)
+        'task': 'charge_customer',  
+        # Schedule      
+        'schedule': crontab(minute="*"), #runs every minute
+        'options': {
+            'expires': 15.0, #cancel task if not able to run after these seconds
+        },
+    },
     'charge_customer_every_week': {
         # Task Name (Name Specified in Decorator)
         'task': 'charge_customer',  
