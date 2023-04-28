@@ -26,8 +26,8 @@ class ChargeCardAPIView(APIView):
 		"""Post method"""
 
 		#no need of fullname in the request from user again
-		# request_user_fullname = f"{request.user.first_name} {request.user.last_name}"
-		# request.data["fullname"] = request_user_fullname
+		request_user_fullname = f"{request.user.first_name} {request.user.last_name}"
+		request.data["fullname"] = request_user_fullname
 
 		serializer = self.serializer_class(data=request.data,  context={"request": request})
 		if serializer.is_valid():
