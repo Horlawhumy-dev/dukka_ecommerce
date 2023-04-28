@@ -21,7 +21,7 @@
 
 ### CELERY Tasks CONFIG
 
-I used (Railway)[https://railway.app] for deployment. They do not provided ssh access into the deployment server. So, I could not the following celery command to spin up the worker and scheduler in production. However, this has been tested locally and it works very fine. 
+I used [Railway](https://railway.app) for deployment. They do not provided ssh access into the deployment server. So, I could not the following celery command to spin up the worker and scheduler in production. However, this has been tested locally and it works very fine. 
 
 Then, these commands could be run in separate terminal to see payment reoccurrence in acction.
 
@@ -40,25 +40,25 @@ Then, these commands could be run in separate terminal to see payment reoccurren
 
 ### FLutterwave Payment Dashboard
 
-Login to (Dashboard)[https://app.flutterwave.com/login] with the below details to view the payment reoccurrence details.
+Login to [Dashboard](https://app.flutterwave.com/login) with the below details to view the payment reoccurrence details.
 
 Email: harof.dev@gmail.com
 Password: 12Facebook@6
 
 
 ### Django Dashboard
-(Admin Dashboard)[https://dukka-power-test-production.up.railway.app/admin]
+[Admin Dashboard](https://dukka-power-test-production.up.railway.app/admin)
 Username: dukkaadmin
 Password: 12Facebook@6
 
-(Deployment Link)[https://dukka-power-test-production.up.railway.app]
+[Deployment Link](https://dukka-power-test-production.up.railway.app)
 
 ### Postman Collections
 These are the links to published Endpoints for the test.
 
-(Account Auth)[https://documenter.getpostman.com/view/18546780/2s93eSXZya]
-(Payment History)[https://documenter.getpostman.com/view/18546780/2s93eSXa45]
-(Payment)[https://documenter.getpostman.com/view/18546780/2s93eSXa46]
+[Account Auth](https://documenter.getpostman.com/view/18546780/2s93eSXZya) \
+[Payment History](https://documenter.getpostman.com/view/18546780/2s93eSXa45) \
+[Payment](https://documenter.getpostman.com/view/18546780/2s93eSXa46)
 
 #### Note: Never run the command `pip freeze > requirements.txt` because it copies unneccessary dependencies from virtual env. Instead use `pip chill` or manually add any installed dependencies into `req.txt`.
 
