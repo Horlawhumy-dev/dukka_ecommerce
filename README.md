@@ -14,7 +14,7 @@
 - Run `pip install -r requirements.txt` for installing requirements.
 - Copy everything from `env.example` to `.env` file and edit accordingly.
 - Run `python3  manage.py makemigrations` and `python3 manage.py migrate` to migrate model to db.
-- Run `pytest` for tests.
+- Run `pytest` or `python3 manage.py test` for tests.
 - Lastly, Run `python3 manage.py runserver` to spin up server locally.
 
 
