@@ -21,7 +21,7 @@
 
 ### CELERY Tasks CONFIG
 
-I used [Railway](https://railway.app) for deployment. They do not provided ssh access into the deployment server. So, I could not the following celery command to spin up the worker and scheduler in production. However, this has been tested locally and it works very fine. 
+I used [Railway](https://railway.app) for deployment. They do not provided ssh access into the deployment server. So, I could not run the following celery command to spin up the worker and scheduler in production. However, this has been tested locally and it works very fine. 
 
 Then, these commands could be run in separate terminal to see payment reoccurrence in acction.
 
