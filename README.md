@@ -1,6 +1,3 @@
-# Dukka Power Backend Test
-
-
 ### Local Setup
 
 - Clone the repository with ` git clone git@github.com:Horlawhumy-dev/dukka_ecommerce.git`
@@ -21,8 +18,6 @@
 
 ### CELERY Tasks CONFIG
 
-I used [Railway](https://railway.app) for deployment. They do not provided ssh access into the deployment server. So, I could not run the following celery command to spin up the worker and scheduler in production. However, this has been tested locally and it works very fine.
-
 Note: You can as well follow this [article](https://www.nickmccullum.com/celery-django-periodic-tasks/) for the celery configuration.
 
 Then, these commands could be run in separate terminal to see payment reoccurrence in acction.
@@ -40,28 +35,12 @@ Then, these commands could be run in separate terminal to see payment reoccurren
 - Run `celery -A dukka_ecommerce beat -l info --logfile=celery.beat.log --detach` to create new scheduler beat log file
 
 
-### FLutterwave Payment Dashboard
-
-Login to [Dashboard](https://app.flutterwave.com/login) with the below details to view the payment reoccurrence details.
-
-Email: harof.dev@gmail.com
-Password: 12Facebook@6
-
-
-### Django Dashboard
-[Admin Dashboard](https://dukka-power-test-production.up.railway.app/admin)
-Username: dukkaadmin
-Password: 12Facebook@6
-
-[Deployment Link](https://dukka-power-test-production.up.railway.app)
 
 ### Postman Collections
-These are the links to published Endpoints for the test.
+These are the links to the published Endpoints for the test.
 
 [Account Auth](https://documenter.getpostman.com/view/18546780/2s93eSXZya) \
 [Payment History](https://documenter.getpostman.com/view/18546780/2s93eSXa45) \
 [Payment](https://documenter.getpostman.com/view/18546780/2s93eSXa46)
 
-#### Note: Never run the command `pip freeze > requirements.txt` because it copies unneccessary dependencies from virtual env. Instead use `pip chill` or manually add any installed dependencies into `req.txt`.
-
-### Awaiting your response. Thank you
+#### Note: Never run the command `pip freeze > requirements.txt` because it copies unnecessary dependencies from the virtual environment. Instead, use `pip chill` or manually add any installed dependencies into `req.txt`.
